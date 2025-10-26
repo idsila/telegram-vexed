@@ -8,7 +8,6 @@ const app = express();
 const { TelegramClient } = require("telegram");
 const { StringSession } = require("telegram/sessions");
 const { NewMessage } = require("telegram/events/index.js");
-const input = require("input");
 
 const API_ID = +process.env.API_ID;
 const API_HASH = process.env.API_HASH;
@@ -48,7 +47,6 @@ async function startApp() {
       if (message.fwdFrom && message.fwdFrom.channelPost) {
         console.log("🆕 Новый пост из канала обнаружен!");
 
-
         const photos = [
           'https://i.ibb.co/PvWMxRhF/5opka-1.jpg',
           'https://i.ibb.co/hr8tr8X/5opka-2.jpg',
@@ -83,6 +81,11 @@ async function startApp() {
         console.log("✅ Комментарий отправлен:");
       }
     }, new NewMessage({ chats: [commentGroupId] }));
+
+    app.get('/sleep', async (req,res) =>{
+      res.send({ type: 200 })
+    });
+
   } catch (err) {
     console.error("❌ Непредвиденная ошибка:", err);
     process.exit(1);
