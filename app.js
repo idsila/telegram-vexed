@@ -7,7 +7,6 @@ const app = express();
 
 const { TelegramClient } = require("telegram");
 const { StringSession } = require("telegram/sessions");
-const { Api } = require("telegram/tl");
 const { NewMessage } = require("telegram/events/index.js");
 const input = require("input");
 
@@ -28,7 +27,6 @@ async function startApp() {
 
     await client.start();
 
-
     async function findChannel() {
       const dialogs = await client.getDialogs();
 
@@ -38,46 +36,53 @@ async function startApp() {
 
     //await findChannel();
 
-    //const commentGroupId = -1002398372400;
+    const commentGroupId = -1002398372400;
 
-    const commentGroupId = -1003299332773;
+    //const commentGroupId = -1003299332773;
 
-    client.addEventHandler(
-      async (event) => {
-        const message = event.message;
-  
-        // Проверяем, что сообщение из нужного чата
-        if (Number(message.chatId.valueOf()) !== commentGroupId) return;
-  
-        // Проверяем, что это пост из канала (пересланное сообщение)
-        if (message.fwdFrom && message.fwdFrom.channelPost) {
-          console.log("🆕 Новый пост из канала обнаружен!");
-  
-          // Случайный комментарий
-          const comments = [
-            "🔥 Отличный пост!",
-            "💫 Очень интересно!",
-            "😍 Супер, как всегда!",
-            "💥 Просто топ!",
-            "🔥🔥🔥",
-          ];
-          const randomComment = comments[Math.floor(Math.random() * comments.length)];
-  
-          
-          // Отправляем комментарий
-          await client.sendMessage(commentGroupId, {
-            file: 'https://upload.wikimedia.org/wikipedia/commons/5/53/Sheba1.JPG',
-            message: randomComment,
-            replyTo: message.id,
-          });
-  
-          console.log("✅ Комментарий отправлен:");
-        }
-      },
-      new NewMessage({ chats: [commentGroupId] })
-    );
+    client.addEventHandler(async (event) => {
+      const message = event.message;
+
+      if (Number(message.chatId.valueOf()) !== commentGroupId) return;
+
+      if (message.fwdFrom && message.fwdFrom.channelPost) {
+        console.log("🆕 Новый пост из канала обнаружен!");
 
 
+        const photos = [
+          'https://i.ibb.co/PvWMxRhF/5opka-1.jpg',
+          'https://i.ibb.co/hr8tr8X/5opka-2.jpg',
+          'https://i.ibb.co/1fLnBTsG/5opka-3.jpg',
+          'https://i.ibb.co/4wvG8XSn/5opka-4.jpg',
+          'https://i.ibb.co/x8sJzZN6/5opka-5.jpg'
+        ]
+        const comments = [
+          "42 братухи за нашего босса, фугоботы пятерка мега хайп на SLAY!",
+          "Мем-года, хайп всего Twitch, 5opka забирает Slay King 2025!",
+          "Пятерка рулит сценой, мы фанаты, залуженно выигрываем каждый год!",
+          "2023, 2024 и 2025 — наша эра, босс всего Twitch побеждает!",
+          "Фугоботы включены, мега хайп, мем-года и победа за 5opka!",
+          "Все за одного, один за всех, 42 братухи поддерживают босса!",
+          "5opka на троне Twitch, мега хайп, мемы, победа и Slay King!",
+          "Пятерка — босс всего Twitch, мы забираем премию Slay 2025!",
+          "Фугоботы готовы, хайп зашкаливает, мем-года и победа на сцене!",
+          "SLAY 2025, 5opka, мега хайп, мем-года и фанаты навсегда!",
+        ];
+        
+        const randomPhoto = photos[Math.floor(Math.random() * photos.length)];
+        const randomComment = comments[Math.floor(Math.random() * comments.length)];
+
+
+        await client.sendMessage(commentGroupId, {
+          file: randomPhoto,
+          message: `<blockquote><b>${randomComment}</b></blockquote> \n #братуха42 #мега_хайп #победа_не_избежна`,
+          parseMode: "html",
+          replyTo: message.id,
+        });
+
+        console.log("✅ Комментарий отправлен:");
+      }
+    }, new NewMessage({ chats: [commentGroupId] }));
   } catch (err) {
     console.error("❌ Непредвиденная ошибка:", err);
     process.exit(1);
