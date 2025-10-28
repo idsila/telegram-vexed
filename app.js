@@ -29,17 +29,15 @@ async function startApp() {
     async function findChannel() {
       const dialogs = await client.getDialogs();
 
-      const chat_slay = dialogs.find((chat) => chat.name === "HardBoost Chat");
+      const chat_slay = dialogs.find((chat) => chat.name === "42 FanLab Chat");
       console.log(chat_slay);
     }
 
     //await findChannel();
+    // vexed  {chat:-1003250534097, channel: 2769199478}
 
-    //const commentGroupId = -1002398372400;
-     //const commentGroupId = -1003299332773;
+    const commentGroupsId = [ {chat: -1002398372400, channel: 2106543498}, { chat: -1003299332773, channel: 3183906489 }];
 
-    const commentGroupsId = [-1002398372400, -1003299332773, -1002922935842];
-   
     commentGroupsId.forEach(async (item) => {
       await runNotifucation(item);
     });
@@ -47,10 +45,13 @@ async function startApp() {
     async function runNotifucation(commentGroupId) {
       client.addEventHandler(async (event) => {
         const message = event.message;
+       
 
-        if (Number(message.chatId.valueOf()) !== commentGroupId) return;
+        if (Number(message.chatId.valueOf()) !== commentGroupId.chat) return;
 
-        if (message.fwdFrom && message.fwdFrom.channelPost) {
+        if (message.fwdFrom && message.fwdFrom.channelPost &&
+          message.fwdFrom.fromId.className === "PeerChannel" &&
+          Number(message.fwdFrom.fromId.channelId) === commentGroupId.channel) {
           console.log("🆕 Новый пост из канала обнаружен!");
 
           const photos = [
@@ -146,7 +147,7 @@ async function startApp() {
           const randomComment =
             comments[Math.floor(Math.random() * comments.length)];
 
-          await client.sendMessage(commentGroupId, {
+          await client.sendMessage(commentGroupId.chat, {
             file: randomPhoto,
             message: `<blockquote><b>${randomComment}</b></blockquote>\n ${
               hashtags[hashtaId]
@@ -159,7 +160,7 @@ async function startApp() {
 
           console.log("✅ Комментарий отправлен:");
         }
-      }, new NewMessage({ chats: [commentGroupId] }));
+      }, new NewMessage({ chats: [commentGroupId.chat] }));
     }
     app.get("/sleep", async (req, res) => {
       res.send({ type: 200 });
