@@ -1,59 +1,7 @@
+https://i.ibb.co/s9pySMkx/5opka-10.jpg
 
-        const hashtags = [
-          "#Пятёрка",
-          "#5opka",
-          "#Slay2025",
-          "#SlayKing",
-          "#Фугоботы",
-          "#42Братухи",
-          "#БоссТвича",
-          "#МемГода",
-          "#ХайпГода",
-          "#ТвичЛегенда",
-          "#SlayПобеда",
-          "#ЗаПятёрку",
-          "#ФугоботАрмия",
-          "#БратухаПрайд",
-          "#ПятёркаБосс",
-          "#МемныйКороль",
-          "#ХайпБезГраниц",
-          "#SlayНавсегда",
-          "#ФугоботыВперёд",
-          "#ПятёркаХайп",
-          "#SlayЛегенда",
-          "#БратухиВБою",
-          "#ФугоботСила",
-          "#ПятёркаНавсегда",
-          "#КорольТвича",
-          "#МемнаяАрмия",
-          "#БратухаДвиж",
-          "#ПятёркаSlay",
-          "#42ЗаБосса",
-          "#ФугоботыСнами",
-          "#Пятёрка2025",
-          "#SlayЗалНаш",
-          "#SlayБратухи",
-          "#ТопТвич",
-          "#ФугоботХайп",
-          "#SlayВдохновение",
-          "#ХайпПятёрки",
-          "#БратухиФугоботы",
-          "#МемныйSlay",
-          "#ТвичБосс",
-          "#СлаваПятёрке",
-          "#SlayПятёрка"
-        ];
-        
+https://i.ibb.co/dwz4yTr5/5opka-11.jpg
 
-function gen(){
-  const hashtaId = Math.floor(Math.random() * hashtags.length);
-  const item_1 = hashtags[hashtaId];
-  const item_2 = hashtags[(hashtaId > hashtags.length-2) ? 0 : hashtaId+1];
-  const item_3 = hashtags[(hashtaId > hashtags.length-3) ? 0 : hashtaId+2];
-  if(item_1 == undefined || item_2 == undefined || item_3 == undefined ){
-    alert('Error 42')
-  }
-  return `${item_1} ${item_2} ${item_3}`
-}
+https://i.ibb.co/8ndj3KcR/5opka-12.jpg
 
-setInterval(() => {console.log(gen())}, 10)
+https://i.ibb.co/TqBB296G/5opka-13.jpg
