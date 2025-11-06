@@ -176,11 +176,7 @@ async function startApp() {
 
           await client.sendMessage(commentGroupId.chat, {
             file: randomPhoto,
-            message: `<blockquote><b>${randomComment}</b></blockquote>\n ${
-              hashtags[hashtaId]
-            } ${hashtags[hashtaId > hashtags.length - 2 ? 0 : hashtaId + 1]} ${
-              hashtags[hashtaId > hashtags.length - 3 ? 0 : hashtaId + 2]
-            }`,
+            message: `<blockquote><b>${randomComment}</b></blockquote>\n<b><u>СЛАВА 1 БАТАЛЬОНУ 42 ПРОПАГАНДЫ</u></b>`,
             parseMode: "html",
             replyTo: message.id,
           });
