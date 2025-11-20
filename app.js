@@ -78,5 +78,5 @@ getPosts().then(() => {
 });
 
 app.listen(3001, (err) => {
-  err ? err : console.log("STARTED SERVER");
+  err ? err : console.log("STARTED SERVER 42");
 });
