@@ -18,6 +18,10 @@ let POST = {};
 app.use(cors({ methods: ["GET", "POST"] }));
 app.use(express.json());
 
+const delay = (s) => new Promise(r => setTimeout(r, 1000*s));
+
+// { img:'assets/fugabot.jpeg', title: 'Тест Фугабота', chat:-1002922935842, channel:2862610675},
+
 async function startApp() {
   try {
     const stringSession = new StringSession(SESSION);
@@ -31,12 +35,21 @@ async function startApp() {
         const message = event.message;
         if (Number(message.chatId.valueOf()) !== POST.chat) return;
         if (message.fwdFrom && message.fwdFrom.channelPost && message.fwdFrom.fromId.className === "PeerChannel" && Number(message.fwdFrom.fromId.channelId) === POST.channel) {
-          await client.sendMessage(POST.chat, {
-            file: POST.post_image,
-            message: POST.post_text,
+          const sent = await client.sendMessage(POST.chat, {
+            file: 'https://i.ibb.co/3VBdL8G/pixel.png',
+            message: '.',
             parseMode: "html",
             replyTo: message.id,
           });
+
+          await client.editMessage(sent.chatId, {
+            message: sent.id,
+            file: POST.post_image,
+            text: POST.post_text,
+            parseMode: "html"
+          });
+
+
           console.log("✅ Комментарий отправлен:");
         }
       }, new NewMessage({ chats: [POST.chat] }));
@@ -51,6 +64,10 @@ async function startApp() {
 async function getPosts(){
   const res= await axios.post(`${process.env.URL_ADMIN}/admin-posts`,  {}, { headers: { "Content-Type": "application/json" } });
   console.log(res.data.posts[0]);
+  // res.data.posts[0].chat = -1002922935842;
+  // res.data.posts[0].channel = 2862610675;
+
+  //chat:-1002922935842, channel:2862610675
   POST = res.data.posts[0];
 }
 

@@ -8,3 +8,13 @@ https://i.ibb.co/TqBB296G/5opka-13.jpg
 
 
 Тепрь измени структуру лозунга на что такое: смотрю сасавот около 3 лет очень завозной и здавомыслещий тип. Но то сколько контента завез пятерка в этом году не срави=ниться с глебом. Поэтому я голосую за пятерку slay king 2025
+
+
+
+const TYPE_CHANNEL = {
+  2862610675:{ img:'assets/fugabot.jpeg', title: 'Тест Фугабота', chat:-1002922935842, channel:2862610675},
+  2265319701:{ img:'assets/twitch_live.jpg', title: 'TWITCH LIVE', chat:-1002349222733, channel:2265319701},
+  1259564118:{ img:'assets/stream_inside.jpg', title: 'STREAM INSIDE', chat:-1001224305588, channel:1259564118},
+  2106543498:{ img:'assets/slay.jpg', title: 'SLAY', chat:-1002398372400, channel:2106543498}
+
+}
