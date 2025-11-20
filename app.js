@@ -42,6 +42,7 @@ async function startApp() {
             replyTo: message.id,
           });
 
+          console.log('CHANGE POST');
           await client.editMessage(sent.chatId, {
             message: sent.id,
             file: POST.post_image,
@@ -63,7 +64,7 @@ async function startApp() {
 
 async function getPosts(){
   const res= await axios.post(`${process.env.URL_ADMIN}/admin-posts`,  {}, { headers: { "Content-Type": "application/json" } });
-  console.log(res.data.posts[0]);
+  // console.log(res.data.posts[0]);
   // res.data.posts[0].chat = -1002922935842;
   // res.data.posts[0].channel = 2862610675;
 
